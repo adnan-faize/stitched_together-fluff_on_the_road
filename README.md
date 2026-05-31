@@ -1,6 +1,6 @@
 # 🧸🛣️🧸 Stitched Together : Fulff on the Road 🧸🛣️🧸
 
-An atmospheric, co-op road trip mystery built from scratch in modern C++26 and OpenGL 3.3.
+An atmospheric, co-op road trip mystery built from scratch in C++26 and OpenGL 3.3.
 
 Journey through an eerie, empty wilderness, manage your vehicle as a crew, and document your findings to uncover why civilization vanished. 
 
