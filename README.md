@@ -62,6 +62,15 @@ To ensure a locked 60 FPS on integrated mobile GPUs, the custom engine architect
 ## 📋 Development Roadmap
 
 ### Phase 1 : Engine Foundation & Windowing
+- [x] Setup CMake
+- [ ] Initialize GLFW window context and capture monitor resolution.
+- [ ] Initialize GLAD and configure OpenGL viewport.
+- [ ] Setup Delta Time calculation for framerate independent logic.
+- [ ] Create `InputManager` class to wrap GLFW keyboard/mouse callbacks.
+- [ ] Implement generic camera class (FPS/Freelook with Euler angles).
+- [ ] Write Python script for `.pak` asset compilation.
+- [ ] Create base C++ `ResourceManager` to read `.pak` binary offsets.
+- [ ] Implement CMake generator expression for Debug (loose) vs Release (packed) pipelines. 
 
 ### Phase 2 : Core Graphics & Audio Pipelines
 
