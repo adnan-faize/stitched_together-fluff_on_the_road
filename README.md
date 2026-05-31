@@ -26,7 +26,7 @@ Survive alone or journey together with friends **Local or Online Co-Op**. Player
 Driving down the long, empty roads causes physical fatigue. The active driver's stamina will steadily deplete, causing their vision to blur, narrow, and periodically fade to black as the experience "micro-naps".
 - To prevent a catastrophic crash, the crew must actively manage sleep schedules. Players must physically stop the van to swap seats, allow the tired driver to recover by sleeping in the passenger seats, or pass up scavenged coffee items to stay awake just long enough to reach the next safe zone. 
 
-### 🏡 Regional Lookout Bases
+### 🏠 Regional Lookout Bases
 Every frontier region contains a prominent structural landmark (like a prominent Firetower or Ranger Station).
 - Clearing and cleaning a base camp establishes a permanent checkpoint within that procedural region. Use bases to build secure item stashes, swap out major vehicule configurations, or use the beds to completely restore the entire party's stamina before pushing through the next frontier.
 
