@@ -60,3 +60,21 @@ To ensure a locked 60 FPS on integrated mobile GPUs, the custom engine architect
 ---
 
 ## 📋 Development Roadmap
+
+### Phase 1 : Engine Foundation & Windowing
+
+### Phase 2 : Core Graphics & Audio Pipelines
+
+### Phase 3 : Local & Online Co-Op Foundation
+
+### Phase 4 : Character & Customization
+
+### Phase 5 : Van & Physics
+
+### Phase 6 : Driver Stamina & Sleepiness
+
+### Phase 7 : Procedural Frontiers & Endless Road
+
+### Phase 8 : Journal, Scavenging, Safehouses
+
+### Phase 9 : Polish Everything & Give Atmosphere
