@@ -8,13 +8,9 @@ Journey through an eerie, empty wilderness, manage your vehicle as a crew, and d
 
 (Inspired by *Jalopy*, *Pacific Drive*, and *Firewatch*. Designed with optimization-first architecture to run smoothly on lower-end harware such as Intel UHD 620 integrated graphics)
 
----
-
 ## 🏕️ The Premise 
 
 You are a firewatcher stationed deep within an isolated, sprawling wilderness. The game begins as your summer shift ends; you pack your gear and drive down the long forest road back toward the city, only to discover an usettling truth : **everyone is gone**. With no answers left behind, you turn your vehicle around and head back to your started base camp. The road ahead is long, divided by mysterious borders, and littered with the remnants of an empty world waiting for you to uncover its secrets. 
-
----
 
 ## 🕹️ Core Gameplay Loops & Features
 
@@ -37,16 +33,12 @@ Every frontier region contains a prominent structural landmark (like a prominent
 ### 📔 Journaling System
 The core narrative progression is driven by your **Daily Journal**. Since the world is completely unpopulated, you aren't hunting NPCs; you are hunting answers. Pull over to photograph environmental anomalies, collect discarded documents, or sketch strange structures. Filling your journal acts as your primary objective and survival log.
 
----
-
 ## 🔧 Technical Architecture & Optimization
 
 To ensure a locked 60 FPS on integrated mobile GPUs, the custom engine architecture implements strict low-overhead data lifecycles : 
 
 - **Asynchronous VFS (Virtual File System) :** Assets are categorized into isolated, independent `.pak` archives. The engine strictly loads and unloads modules on demand, keeping RAM usage lean.
 - ...
-
----
 
 ## 🧰 Software Stack
 
@@ -56,8 +48,6 @@ To ensure a locked 60 FPS on integrated mobile GPUs, the custom engine architect
 - **OpenGL Loader :** [GLAD](https://glad.dav1d.de/#language=c&specification=gl&api=gl%3D3.3&api=gles1%3Dnone&api=gles2%3Dnone&api=glsc2%3Dnone&profile=core&extensions=GL_KHR_debug&loader=on)
 - **Mathematics :** GLM (OpenGL Mathematics)
 - **Automation :** Python 3 (For cross-platform asset package compilation)
-
----
 
 ## 📋 Development Roadmap
 
