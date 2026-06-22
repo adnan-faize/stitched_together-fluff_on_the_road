@@ -1,0 +1,18 @@
+[
+  {
+    "label": "Setup CMake Debug build folder",
+    "command": "cmake",
+    "args": ["-B", "debug", "-G", "Ninja"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "allow_concurrent_runs": false,
+    "hide": "never",
+  },
+  {
+    "label": "Cmake Build Debug",
+    "command": "cmake",
+    "args": ["--build", "debug", "--config", "Debug"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "allow_concurrent_runs": false,
+    "hide": "never",
+  },
+]

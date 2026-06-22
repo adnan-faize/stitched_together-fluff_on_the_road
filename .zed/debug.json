@@ -1,0 +1,8 @@
+[
+  {
+    "label": "Debug C++ Project",
+    "program": "$ZED_WORKTREE_ROOT/debug/STFR",
+    "request": "launch",
+    "adapter": "CodeLLDB",
+  },
+]
