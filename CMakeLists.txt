@@ -18,20 +18,22 @@ add_subdirectory(extern/glfw)
 
 add_library(glad extern/glad/src/glad.c)
 target_include_directories(glad PUBLIC extern/glad/include)
-target_include_directories(glm PRIVATE extern/glm)
+
+add_subdirectory(extern/glm)
 
 find_package(OpenGL REQUIRED)
 
 # ==========================================================
 # Jolt Physics
 # ==========================================================
-set(TARGET_UNIT_TESTS OFF CACHE BOOL "Disable Jolt unit tests" FORCE)
-set(TARGET_HELLO_WORLD OFF CACHE BOOL "Disable Jolt hello world" FORCE)
-set(TARGET_PERFORMANCE_TEST OFF CACHE BOOL "Disable Jolt perf tests" FORCE)
-set(TARGET_SAMPLES OFF CACHE BOOL "Disable Jolt samples" FORCE)
-set(TARGET_VIEWER OFF CACHE BOOL "Disable Jolt viewer" FORCE)
-set(USE_SSE4_2 ON CACHE BOOL "Enable SSE4.2 for performance" FORCE)
-add_subdirectory(extern/jolt)
+set(CMAKE_DISABLE_FIND_PACKAGE_Vulkan ON)
+set(TARGET_UNIT_TESTS OFF CACHE BOOL "" FORCE)
+set(TARGET_HELLO_WORLD OFF CACHE BOOL "" FORCE)
+set(TARGET_PERFORMANCE_TEST OFF CACHE BOOL "" FORCE)
+set(TARGET_SAMPLES OFF CACHE BOOL "" FORCE)
+set(TARGET_VIEWER OFF CACHE BOOL "" FORCE)
+set(USE_SSE4_2 ON CACHE BOOL "" FORCE)
+add_subdirectory(extern/jolt/Build)
 
 # ==========================================================
 # Debug ONLY (cr.h & imgui)
@@ -40,8 +42,8 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_compile_definitions(STFR_DEBUG)
 
   # --- cr.h
-  set(CR_BUILD_TESTS OFF CACHE BOOL "Disable cr tests" FORCE)
-  set(CR_BUILD_EXAMPLES OFF CACHE BOOL "Disable cr examples" FORCE)
+  set(CR_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+  set(CR_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
   add_subdirectory(extern/cr)
 
   # --- imgui
@@ -55,8 +57,20 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     extern/imgui/backends/imgui_impl_opengl3.cpp
   )
   target_include_directories(imgui PUBLIC extern/imgui extern/imgui/backends)
+  target_include_directories(imgui PRIVATE extern/glfw/include)
 endif()
 
+# ==========================================================
+# Engine
+# ==========================================================
+
+# TODO
+
+# ==========================================================
+# Game
+# ==========================================================
+
+# TODO
 
 # ==========================================================
 # Executable target
@@ -66,6 +80,7 @@ add_executable(STFR src/main.cpp)
 target_link_libraries(STFR PRIVATE
   glad
   glfw
+  glm
   OpenGL::GL
   Jolt
 )

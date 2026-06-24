@@ -6,10 +6,10 @@
 	url = https://github.com/g-truc/glm.git
 [submodule "extern/jolt"]
 	path = extern/jolt
-	url = https://github.com/jrouwe/JoltPhysics
+	url = https://github.com/jrouwe/JoltPhysics.git
 [submodule "extern/cr"]
 	path = extern/cr
-	url = https://github.com/fungos/cr
+	url = https://github.com/fungos/cr.git
 [submodule "extern/imgui"]
 	path = extern/imgui
-	url = https://github.com/ocornut/imgui
+	url = https://github.com/ocornut/imgui.git
