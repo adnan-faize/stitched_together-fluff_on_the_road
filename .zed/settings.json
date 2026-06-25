@@ -2,7 +2,10 @@
   "lsp": {
     "clangd": {
       "binary": {
-        "arguments": ["--compile-commands-dir=debug", "--background-index"],
+        "arguments": [
+          "--compile-commands-dir=build-debug",
+          "--background-index",
+        ],
       },
     },
   },
