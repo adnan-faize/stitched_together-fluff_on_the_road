@@ -9,8 +9,6 @@
 #include <cstdlib>
 #include <print>
 
-#define GAME_VERSION "v.1"
-
 #ifdef STFR_DEBUG
     #define CR_HOST
     #include <cr.h>
