@@ -29,6 +29,8 @@ void Logger::Shutdown() {
 void Logger::Log(LogLevel level, const std::string& message) {
     std::lock_guard<std::mutex> lock(m_Mutex);
 
+    std::string datetime = "";
+
     std::string prefix = "TODO";
 
     std::cout << prefix << message << std::endl; // TODO : Add datetime
