@@ -12,7 +12,6 @@
 #include <mutex>
 #include <cstdint>
 #include <format>
-#include <string_view>
 
 enum class LogLevel : uint8_t {
     INFO    = 0,
@@ -26,6 +25,8 @@ class Logger {
     public:
         static void Init(const std::string& filename);
         static void Shutdown();
+        static void DisableLogs();
+        template<typename... Args>
         static void Log(LogLevel level, const std::format_string<Args...> fmt, Args&&... args);
 
     private:
@@ -38,14 +39,10 @@ class Logger {
         static std::mutex m_Mutex;
         static std::string m_Filename;
         static bool m_Initialized;
+        static bool m_Disabled;
 
         Logger() = delete;
         ~Logger() = delete;
         Logger(const Logger&) = delete;
         Logger& operator=(const Logger&) = delete;
 };
-
-template<>
-inline static void Log(LogLevel level, const std::format_string<Args...> fmt, Args&&... args) {
-    
-}
