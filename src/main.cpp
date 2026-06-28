@@ -7,7 +7,6 @@
  */
 
 #include <cstdlib>
-#include <print>
 
 #ifdef STFR_DEBUG
     #define CR_HOST
@@ -16,12 +15,17 @@
 
 #endif
 
+#include "utils/logger.hpp"
+
 int main(int argc, char** argv) {
+    stfr::utils::Logger::Init("stfr.log");
+
 
 #ifdef STFR_DEBUG
-    std::println("[INFO] Booting in DEBUG mode version {} with Hot-Reloading.", GAME_VERSION);
+    stfr::utils::Logger::Log(stfr::utils::LogLevel::INFO, "[INFO] Booting in DEBUG mode version {} with Hot-Reloading.", GAME_VERSION);
     cr_plugin ctx;
     cr_plugin_load(ctx, LIB_GAME_ENTRYPOINT);
+
 
     while (true) {
 
@@ -31,12 +35,14 @@ int main(int argc, char** argv) {
 
     cr_plugin_close(ctx);
 #else
-    std::println("[INFO] Booting in RELEASE mode version {}", GAME_VERSION);
+    stfr::utils::Logger::Log(stfr::utils::LogLevel::Info, "[INFO] Booting in RELEASE mode version {}.", GAME_VERSION);
 
     while (true) {
 
     }
 #endif
+
+    stfr::utils::Logger::Shutdown();
 
     return EXIT_SUCCESS;
 }
