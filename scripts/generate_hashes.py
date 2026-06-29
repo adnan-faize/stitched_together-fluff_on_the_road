@@ -15,7 +15,7 @@ def generate_header(output_path, dlls):
     with open(output_path, "w") as f:
         f.write("#pragma once\n\n")
         f.write("#include <cstdint>\n\n")
-        f.write("namespace stfr::integrity {\n\n")
+        f.write("namespace stfr_core::integrity {\n\n")
         f.write(
             "\tstatic constexpr struct { const char* name; uint64_t hash; } EXPECTED_HASHES[] = {\n"
         )

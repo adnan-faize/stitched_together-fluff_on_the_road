@@ -19,10 +19,10 @@
 #include "core/logger.hpp"
 
 int main(int argc, char** argv) {
-    stfr::core::Logger::Init("stfr.log");
+    stfr_core::Logger::Init("stfr.log");
 
 #ifdef STFR_DEBUG
-    stfr::core::Logger::Log(stfr::core::INFO, "[INFO] Booting in DEBUG mode version {} with Hot-Reloading.", GAME_VERSION);
+    stfr_core::Logger::Log(stfr_core::INFO, "[INFO] Booting in DEBUG mode version {} with Hot-Reloading.", GAME_VERSION);
     cr_plugin ctx;
     cr_plugin_load(ctx, LIB_GAME_ENTRYPOINT);
 
@@ -34,14 +34,14 @@ int main(int argc, char** argv) {
 
     cr_plugin_close(ctx);
 #else
-    stfr::core::Logger::Log(stfr::core::Info, "[INFO] Booting in RELEASE mode version {}.", GAME_VERSION);
+    stfr_core::Logger::Log(stfr::core::Info, "[INFO] Booting in RELEASE mode version {}.", GAME_VERSION);
 
     while (true) {
 
     }
 #endif
 
-    stfr::core::Logger::Shutdown();
+    stfr_core::Logger::Shutdown();
 
     return EXIT_SUCCESS;
 }
@@ -49,8 +49,8 @@ int main(int argc, char** argv) {
 #include "dll_hashes.h"
 
 void VerifyEngineIntegrity() {
-    for (const auto& entry : stfr::integrity::EXPECTED_HASHES) {
-        uint64_t actual = stfr::core::CalculateFileHash(entry.name);
+    for (const auto& entry : stfr_core::integrity::EXPECTED_HASHES) {
+        uint64_t actual = stfr_core::CalculateFileHash(entry.name);
         if (actual != entry.hash) { exit(-1); }
     }
 }

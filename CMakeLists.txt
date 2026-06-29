@@ -24,17 +24,22 @@ include(SetupExternDebug)
 
 include(SetupEngine)
 include(SetupEngineDebug)
+
 include(SetupGame)
+
+include(SetupCore)
 
 # ==========================================================
 # Generate hashes header for integrity checks in main.cpp
 # ==========================================================
 
-set(INTEGRITY_HEADER "${CMAKE_BINRAY_DIR}/generated/dll_hashes.h")
+set(INTEGRITY_HEADER "${CMAKE_CURRENT_BINARY_DIR}/generated/dll_hashes.h")
+
+find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
 add_custom_command(
   OUTPUT "${INTEGRITY_HEADER}"
-  COMMAND ${Python_EXECUTABLE} "${CMAKE_SOURCE_DIR}/scripts/generate_hashes.py"
+  COMMAND ${Python3_EXECUTABLE} "${CMAKE_SOURCE_DIR}/scripts/generate_hashes.py"
     "${INTEGRITY_HEADER}"
     "stfr_engine=$<TARGET_FILE:stfr_engine>"
   DEPENDS stfr_engine
@@ -61,4 +66,5 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 add_dependencies(STFR generate_hash_header)
-target_include_directories(STFR PRIVATE "${CMAKE_BINARY_DIR}/generated")
+target_include_directories(STFR PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/generated")
+target_link_libraries(STFR PRIVATE stfr_core stfr_engine)

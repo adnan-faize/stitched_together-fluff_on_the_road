@@ -12,7 +12,7 @@
 #include <fstream>
 #include <cstdint>
 
-namespace stfr::core {
+namespace stfr_core {
 
     inline uint64_t CalculateFileHash(const std::string& filepath) {
         constexpr uint64_t FNV_OFFSET_BASIS = 0xcbf29ce484222325ULL;
