@@ -6,7 +6,6 @@
  * @author Adnan FAIZE <adnanfaize@gmail.com>
  */
 
-#include "core/hash.hpp"
 #include <cstdlib>
 
 #ifdef STFR_DEBUG
@@ -17,12 +16,13 @@
 #endif
 
 #include "core/logger.hpp"
+#include "core/hash.hpp"
 
 int main(int argc, char** argv) {
     stfr_core::Logger::Init("stfr.log");
 
 #ifdef STFR_DEBUG
-    stfr_core::Logger::Log(stfr_core::INFO, "[INFO] Booting in DEBUG mode version {} with Hot-Reloading.", GAME_VERSION);
+    stfr_core::Logger::Log(stfr_core::LogLevel::INFO, "Booting in DEBUG mode version {} with Hot-Reloading.", GAME_VERSION);
     cr_plugin ctx;
     cr_plugin_load(ctx, LIB_GAME_ENTRYPOINT);
 
@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
 
     cr_plugin_close(ctx);
 #else
-    stfr_core::Logger::Log(stfr::core::Info, "[INFO] Booting in RELEASE mode version {}.", GAME_VERSION);
+    stfr_core::Logger::Log(stfr_core::LogLevel::Info, "Booting in RELEASE mode version {}.", GAME_VERSION);
 
     while (true) {
 

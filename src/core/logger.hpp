@@ -13,6 +13,7 @@
 #include <mutex>
 #include <cstdint>
 #include <format>
+#include <atomic>
 
 namespace stfr_core {
 
@@ -51,6 +52,7 @@ namespace stfr_core {
             inline static std::ofstream m_File;
             inline static std::string m_Filename = "";
             inline static bool m_Initialized = false;
+            inline static std::atomic<bool> m_IsCompressing = false;
 
             Logger() = delete;
             ~Logger() = delete;

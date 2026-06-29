@@ -62,13 +62,18 @@ namespace stfr_core {
     }
 
     void Logger::CompressLogFile() {
-        if (!std::filesystem::exists(m_Filename) || std::filesystem::file_size(m_Filename) <= MAX_FILE_SIZE) {
-            return;
-        }
+        if (m_IsCompressing.load()) { return; }
 
-        m_File.close();
+        std::error_code ec;
+        auto size = std::filesystem::file_size(m_Filename, ec);
 
-        // TODO : Compress the file
+        if (!ec || size <= MAX_FILE_SIZE) { return; }
+
+        m_IsCompressing.store(true);
+
+        if (m_File.is_open()) { m_File.close(); }
+
+        // TODO
 
         std::string archiveName = m_Filename + "." + std::to_string(std::chrono::system_clock::now().time_since_epoch().count()) + ".log";
         std::filesystem::rename(m_Filename, archiveName);

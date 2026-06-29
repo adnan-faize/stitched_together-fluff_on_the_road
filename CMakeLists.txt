@@ -13,7 +13,7 @@ add_compile_definitions(GAME_TITLE="Stitched Together : Fluff on the Road"
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_compile_definitions(STFR_DEBUG
-                          LIB_GAME_ENTRYPOINT=""
+                          LIB_GAME_ENTRYPOINT="libstfr_engine.so"
                           LIB_ENGINE_ENTRYPOINT=""
   )
 endif()
