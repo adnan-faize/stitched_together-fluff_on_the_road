@@ -14,7 +14,7 @@
 #include <cstdint>
 #include <format>
 
-namespace stfr::core {
+namespace stfr_core {
 
     #ifdef STFR_DEBUG
         #define LOG_DEBUG(fmt, ...) stfr::utils::Logger::Log(stfr::utils::DEBUG, fmt, __VA_ARGS__)
@@ -42,7 +42,13 @@ namespace stfr::core {
             static void Shutdown();
             static void DisableLogs();
             template<typename... Args>
-            static void Log(LogLevel level, const std::format_string<Args...> fmt, Args&&... args);
+            static void Log(LogLevel level, const std::format_string<Args...> fmt, Args&&... args) {
+                if (m_Disabled) { return; }
+                if (!m_Initialized) { Init("default.log"); }
+
+                std::string message = std::format(fmt, std::forward<Args>(args)...);
+                _Log(level, message);
+            }
 
         private:
             static void _Log(LogLevel level, const std::string& message);
@@ -50,11 +56,11 @@ namespace stfr::core {
             static void CompressLogFile();
 
             static const size_t MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB limit
-            static std::ofstream m_File;
-            static std::mutex m_Mutex;
-            static std::string m_Filename;
-            static bool m_Initialized;
-            static bool m_Disabled;
+            inline static std::mutex m_Mutex;
+            inline static std::ofstream m_File;
+            inline static std::string m_Filename;
+            inline static bool m_Initialized = false;
+            inline static bool m_Disabled = false;
 
             Logger() = delete;
             ~Logger() = delete;
