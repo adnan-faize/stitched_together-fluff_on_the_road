@@ -9,52 +9,63 @@
 #include <iostream>
 #include <filesystem>
 #include <chrono>
+#include <format>
 
 #include "logger.hpp"
 
 namespace stfr_core {
 
-    void Logger::Init(const std::string& filename) {
-        m_Filename = filename;
-        m_File.open(filename, std::ios::app);
+    void Logger::Init(const std::string& filename = "") {
+        if (!filename.empty()) {
+            m_Filename = filename;
+            m_File.open(filename, std::ios::app);
+        }
+
+        m_Initialized = true;
     }
 
     void Logger::Shutdown() {
+        if (!m_Initialized) { return; }
+
         std::lock_guard<std::mutex> lock(m_Mutex);
 
+        if (m_Filename.empty()) { return; }
         if (m_File.is_open()) {
             m_File.flush();
             m_File.close();
         }
     }
 
-    void Logger::DisableLogs() {
-        m_Disabled = true;
-    }
-
     void Logger::_Log(LogLevel level, const std::string& message) {
         std::lock_guard<std::mutex> lock(m_Mutex);
 
-        std::string datetime = "";
+        std::string timestamp = std::format("{:%FT%T%Ez}", std::chrono::zoned_time{std::chrono::current_zone(), std::chrono::system_clock::now()});
 
-        std::string prefix = "TODO";
+        std::string prefix = "UNKNOWN";
 
-        std::cout << prefix << message << std::endl; // TODO : Add datetime
+        switch (level) {
+            case LogLevel::INFO:    prefix = "INFO";
+            case LogLevel::WARNING: prefix = "WARNING";
+            case LogLevel::ERROR:   prefix = "ERROR";
+            case LogLevel::FATAL:   prefix = "FATAL";
+            case LogLevel::DEBUG:   prefix = "DEBUG";
+        }
 
+        std::cout << std::format("{} [{}] {}", timestamp, prefix, message) << std::endl;
+
+        if (m_Filename.empty()) { return; }
         if (m_File.is_open()) {
-            m_File << prefix << message << std::endl;
+            m_File << std::format("{} [{}] {}", timestamp, prefix, message) << std::endl;
         }
 
-        CheckFileSize();
-    }
-
-    void Logger::CheckFileSize() {
-        if (std::filesystem::exists(m_Filename) && std::filesystem::file_size(m_Filename) > MAX_FILE_SIZE) {
-            CompressLogFile();
-        }
+        CompressLogFile();
     }
 
     void Logger::CompressLogFile() {
+        if (!std::filesystem::exists(m_Filename) || std::filesystem::file_size(m_Filename) <= MAX_FILE_SIZE) {
+            return;
+        }
+
         m_File.close();
 
         // TODO : Compress the file
