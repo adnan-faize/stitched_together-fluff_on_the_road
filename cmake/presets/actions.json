@@ -1,0 +1,83 @@
+{
+  "version": 6,
+  "include": [
+    "targets.json"
+  ],
+  "buildPresets": [
+    {
+      "name": "linux-debug",
+      "configurePreset": "linux-debug",
+      "displayName": "Build Linux (Debug)",
+      "jobs": 10,
+      "cleanFirst": false
+    },
+    {
+      "name": "linux-release",
+      "configurePreset": "linux-release",
+      "displayName": "Build Linux (Release)",
+      "jobs": 10,
+      "cleanFirst": true
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "linux-debug",
+      "configurePreset": "linux-debug",
+      "displayName": "Run STFR Engine Tests (Debug)",
+      "output": {
+        "outputOnFailure": true,
+        "shortProgress": true
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": false
+      }
+    },
+    {
+      "name": "linux-release",
+      "configurePreset": "linux-release",
+      "displayName": "Run STFR Engine Tests (Release)",
+      "output": {
+        "outputOnFailure": true,
+        "shortProgress": true
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": false
+      }
+    }
+  ],
+  "packagePresets": [
+    {
+      "name": "linux-release",
+      "configurePreset": "linux-release",
+      "generators": ["ZIP"],
+      "output": { "debug": false }
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "release-pipeline-linux",
+      "displayName": "Full Release Pipeline (Linux)",
+      "description": "Configures, builds, runs tests, and packages a ZIP for ...",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "linux-release"
+        },
+        {
+          "type": "build",
+          "name": "linux-release"
+        },
+        {
+          "type": "test",
+          "name": "linux-release"
+        },
+        {
+          "type": "package",
+          "name": "linux-release"
+        }
+      ]
+    }
+  ]
+}

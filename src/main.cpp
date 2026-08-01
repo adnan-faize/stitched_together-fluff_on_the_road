@@ -1,56 +1,31 @@
 /**
  * @file main.cpp
  *
- * @brief ...
+ * @brief Main entry point for the application.
  *
- * @author Adnan FAIZE <adnanfaize@gmail.com>
+ * @author Adnan FAIZE
  */
 
 #include <cstdlib>
 
-#ifdef STFR_DEBUG
-    #define CR_HOST
-    #include <cr.h>
-#else
-
-#endif
-
-#include "core/logger.hpp"
-#include "core/hash.hpp"
+#include "platform/platform.hpp"
+#include "renderer/renderer.hpp"
 
 int main(int argc, char** argv) {
-    stfr_core::Logger::Init("stfr.log");
+    stfr_platform::Platform platform;
+    stfr_renderer::Renderer renderer;
 
-#ifdef STFR_DEBUG
-    stfr_core::Logger::Log(stfr_core::LogLevel::INFO, "Booting in DEBUG mode version {} with Hot-Reloading.", GAME_VERSION);
-    cr_plugin ctx;
-    cr_plugin_load(ctx, LIB_GAME_ENTRYPOINT);
+    platform.Initialize(1280, 720, "Stitched Together : Fluff on The Road");
+    renderer.Initialize(platform.GetNativeWindow());
 
-    while (true) {
+    while (!platform.ShouldClose()) {
+        platform.PollEvents();
 
-        cr_plugin_update(ctx);
-        if (ctx.version == 0) { break; }
+        renderer.Clear(0.1f, 0.1f, 0.1f, 1.0f);
+        renderer.Present();
+
+        platform.SwapBuffers();
     }
-
-    cr_plugin_close(ctx);
-#else
-    stfr_core::Logger::Log(stfr_core::LogLevel::Info, "Booting in RELEASE mode version {}.", GAME_VERSION);
-
-    while (true) {
-
-    }
-#endif
-
-    stfr_core::Logger::Shutdown();
 
     return EXIT_SUCCESS;
-}
-
-#include "dll_hashes.h"
-
-void VerifyEngineIntegrity() {
-    for (const auto& entry : stfr_core::integrity::EXPECTED_HASHES) {
-        uint64_t actual = stfr_core::CalculateFileHash(entry.name);
-        if (actual != entry.hash) { exit(-1); }
-    }
 }

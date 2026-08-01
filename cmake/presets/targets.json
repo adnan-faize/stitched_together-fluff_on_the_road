@@ -1,0 +1,59 @@
+{
+  "version": 6,
+  "include": [
+    "base.json",
+    "platforms.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "windows-debug",
+      "displayName": "Windows (Debug)",
+      "inherits": ["base-debug", "platform-windows"]
+    },
+    {
+      "name": "windows-release",
+      "displayName": "Windows (Release)",
+      "inherits": ["base-release", "platform-windows"]
+    },
+    {
+      "name": "linux-debug",
+      "displayName": "Linux (Debug)",
+      "inherits": ["base-debug", "platform-linux"]
+    },
+    {
+      "name": "linux-release",
+      "displayName": "Linux (Release)",
+      "inherits": ["base-release", "platform-linux"]
+    },
+    {
+      "name": "macos-debug",
+      "displayName": "MacOS (Debug)",
+      "inherits": ["base-debug", "platform-macos"]
+    },
+    {
+      "name": "macos-release",
+      "displayName": "MacOS (Release)",
+      "inherits": ["base-release", "platform-macos"]
+    },
+    {
+      "name": "switch-debug",
+      "displayName": "Nintendo Switch (Debug)",
+      "inherits": ["base-debug", "platform-switch"]
+    },
+    {
+      "name": "switch-release",
+      "displayName": "Nintendo Switch (Release)",
+      "inherits": ["base-release", "platform-switch"]
+    },
+    {
+      "name": "ps4-debug",
+      "displayName": "PlayStation 4 (Debug)",
+      "inherits": ["base-debug", "platform-ps4"]
+    },
+    {
+      "name": "ps4-release",
+      "displayName": "PlayStation 4 (Release)",
+      "inherits": ["base-release", "platform-ps4"]
+    }
+  ]
+}
