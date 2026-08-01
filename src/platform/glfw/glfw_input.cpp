@@ -1,6 +1,7 @@
 #include <string>
 #include <string_view>
 #include <unordered_map>
+
 #include <GLFW/glfw3.h>
 
 #include "shared/input_types.hpp"
@@ -9,7 +10,7 @@
 
 namespace stfr_platform {
 
-    stfr::PlatformKey StringToPlatformKey_Physical(std::string_view str) {
+    stfr::InputCode StringToPlatformKey_Physical(std::string_view str) {
         if (str == "W") { return GLFW_KEY_W; }
         if (str == "A") { return GLFW_KEY_A; }
         if (str == "S") { return GLFW_KEY_S; }
