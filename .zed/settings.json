@@ -4,9 +4,6 @@
       "initialization_options": {
         "fallbackFlags": ["-std=c++26"]
       },
-      "binary": {
-        "arguments": ["--compile-commands-dir=build-linux-debug"]
-      }
     }
   }
 }

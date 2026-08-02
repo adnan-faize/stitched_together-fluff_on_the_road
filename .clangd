@@ -1,0 +1,8 @@
+CompileFlags:
+  Remove:
+    - "-fdeps-format=p1689r5"
+    - "-fdeps-file=*"
+    - "-fdeps-target=*"
+    - "-fmodule-mapper=*"
+    - "-fmodules-ts"
+    - "-fno-modules-global-module-fragment"
