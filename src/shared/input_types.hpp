@@ -6,7 +6,15 @@ namespace stfr {
 
     using InputCode = uint16_t;
 
-    constexpr InputCode INPUT_UNKNOWN = 0xFFFFFFFF;
+    constexpr InputCode INPUT_UNKNOWN = 0xFFFF;
+
+    enum class InputDevice : uint8_t {
+        KeyboardMouse,
+        XboxController,
+        Ps4Controller,
+        Switch,
+        SimWheel,
+    };
 
     enum class GeneralAction : uint8_t {
         Unknown = 0,

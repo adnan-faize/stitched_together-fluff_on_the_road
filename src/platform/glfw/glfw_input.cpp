@@ -10,51 +10,46 @@
 
 namespace stfr_platform {
 
-    stfr::InputCode StringToPlatformKey_Physical(std::string_view str) {
+    stfr::InputCode StringToInputCode_Physical(std::string_view str) {
         if (str == "W") { return GLFW_KEY_W; }
         if (str == "A") { return GLFW_KEY_A; }
         if (str == "S") { return GLFW_KEY_S; }
         if (str == "D") { return GLFW_KEY_D; }
 
-        return stfr::PLATFORM_KEY_UNKNOWN;
+        return stfr::INPUT_UNKNOWN;
     }
 
-    static std::unordered_map<std::string, stfr::PlatformKey> s_localizedKeymap;
+    static std::unordered_map<std::string, stfr::InputCode> s_LocalizedMap;
     static bool s_MapInitialized = false;
 
     void InitializeLocalizedMap() {
         if (s_MapInitialized) { return; }
 
-        // Special Keys
-        s_localizedKeymap["Escape"] = GLFW_KEY_ESCAPE;
-        s_localizedKeymap["Enter"] = GLFW_KEY_ENTER;
-        s_localizedKeymap["Tab"] = GLFW_KEY_TAB;
-        s_localizedKeymap["Space"] = GLFW_KEY_SPACE;
-        s_localizedKeymap["Left Shift"] = GLFW_KEY_LEFT_SHIFT;
-        s_localizedKeymap["Left Ctrl"] = GLFW_KEY_LEFT_CONTROL;
-        s_localizedKeymap["Right Shift"] = GLFW_KEY_RIGHT_SHIFT;
-        s_localizedKeymap["Right Ctrl"] = GLFW_KEY_RIGHT_CONTROL;
+        s_LocalizedMap["Escape"] = GLFW_KEY_ESCAPE;
+        s_LocalizedMap["Tab"] = GLFW_KEY_TAB;
+        s_LocalizedMap["Enter"] = GLFW_KEY_ENTER;
+        s_LocalizedMap["Space"] = GLFW_KEY_SPACE;
+        s_LocalizedMap["Left Shift"] = GLFW_KEY_LEFT_SHIFT;
+        s_LocalizedMap["Left Ctrl"] = GLFW_KEY_LEFT_CONTROL;
+        s_LocalizedMap["Right Shift"] = GLFW_KEY_RIGHT_SHIFT;
+        s_LocalizedMap["Right Ctrl"] = GLFW_KEY_RIGHT_CONTROL;
 
-        // Gamepad Buttons
-        // TODO
-
-        // Loop through all localized printable keys
-        for (int key = GLFW_KEY_SPACE; key <= GLFW_KEY_LAST; ++key) {
+        for (int key = GLFW_KEY_SPACE; key <= GLFW_KEY_LAST; key++) {
             const char* name = glfwGetKeyName(key, 0);
-            if (name) { s_localizedKeymap[std::string(name)] = key; }
+            if (name != nullptr) { s_LocalizedMap[std::string(name)] = key; }
         }
 
         s_MapInitialized = true;
     }
 
-    stfr::PlatformKey StringToPlatformKey_Localized(std::string_view str) {
+    stfr::InputCode StringToInputCode_Localized(std::string_view str) {
         InitializeLocalizedMap();
-        auto it = s_localizedKeymap.find(std::string(str));
-        if (it != s_localizedKeymap.end()) { return it->second; }
-        return stfr::PLATFORM_KEY_UNKNOWN;
+        auto it = s_LocalizedMap.find(std::string(str));
+        if (it != s_LocalizedMap.end()) { return it->second; }
+        return stfr::INPUT_UNKNOWN;
     }
 
-    std::string_view PlatformKeyToString_Localized(stfr::PlatformKey code) {
+    std::string_view InputCodeToString_Localized(stfr::InputCode code) {
         switch (code) {
             // Special Keys
             case GLFW_KEY_ESCAPE:        return "Escape";

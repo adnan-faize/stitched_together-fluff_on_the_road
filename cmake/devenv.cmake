@@ -1,5 +1,5 @@
 # ========================================
-# dev.cmake
+# devenv.cmake
 # ========================================
 
 if (CMAKE_EXPORT_COMPILE_COMMANDS)
@@ -16,7 +16,7 @@ if (CMAKE_EXPORT_COMPILE_COMMANDS)
   )
 
   # Check if the symlink succeeded
-  if (SYMLINK_RESULT EQUAL 0)
+  if ("${SYMLINK_RESULT}" STREQUAL "0")
     message(STATUS "Symlink created for compile_commands.json.")
   else()
     message(
@@ -34,4 +34,21 @@ if (CMAKE_EXPORT_COMPILE_COMMANDS)
       VERBATIM
     )
   endif()
+endif()
+
+# Compiler diagnostics & color
+if (MSVC)
+  add_compile_options(
+    /W4          # High warning level
+    /WX          # Treat warnings as errors (Remove if too strict)
+    /permissive- # Enforce strict C++ standard conformance
+  )
+elseif (CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
+  add_compile_options(
+    -fdiagnostics-color=always
+    -Wall        # Standard warnings
+    -Wextra      # Extra warnings
+    -Wpedantic   # Warn if code violates strict ISO ++ standards
+    -Werror      # Treat all warnings as errors
+  )
 endif()
